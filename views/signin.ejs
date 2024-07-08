@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Sign In</h1>
+  <form id="signinForm" onsubmit="event.preventDefault(); signin(this.username.value, this.password.value);" action="/auth/signin" method="POST">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Sign In</button>
+  </form>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

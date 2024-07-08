@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Add Product</h1>
+  <form id="addProductForm" onsubmit="event.preventDefault(); addProductFormSubmit(this);" action="/" method="POST>
+    <div>
+      <label for="productID">Product ID:</label>
+      <input type="text" id="productID" name="productID" required>
+    </div>
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+      <label for="price">Price:</label>
+      <input type="number" id="price" name="price" step="0.01" required>
+    </div>
+    <div>
+      <label for="company">Company:</label>
+      <input type="text" id="company" name="company" required>
+    </div>
+    <div>
+      <label for="featured">Featured:</label>
+      <input type="checkbox" id="featured" name="featured">
+    </div>
+    <div>
+      <label for="rating">Rating:</label>
+      <input type="number" id="rating" name="rating" step="0.1" min="0" max="5">
+    </div>
+    <button type="submit">Add Product</button>
+  </form>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/app.js"></script>
+  <script>
+    const addProductFormSubmit = async (form) => {
+      const productData = {
+        productID: form.productID.value,
+        name: form.name.value,
+        price: parseFloat(form.price.value),
+        company: form.company.value,
+        featured: form.featured.checked,
+        rating: form.rating.value ? parseFloat(form.rating.value) : null
+      };
+
+      try {
+        const response = await axios.post('/products', productData);
+        alert('Product added successfully');
+        // Optionally redirect or update UI
+      } catch (error) {
+        console.error('Error adding product:', error);
+        alert('Failed to add product. Please try again.');
+      }
+    };
+  </script>
+</body>
+</html>
